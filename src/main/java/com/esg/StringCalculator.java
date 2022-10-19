@@ -21,6 +21,12 @@ public class StringCalculator {
     }
 
     private List<Integer> convertToIntegers(String numbers) {
-        return Arrays.stream(numbers.split(",")).map(Integer::parseInt).collect(Collectors.toList());
+        return Arrays.stream(numbers.split(",")).map(o-> {
+            try {
+                return Integer.parseInt(o);
+            } catch (NumberFormatException ex) {
+                return 0;
+            }
+        }).collect(Collectors.toList());
     }
 }

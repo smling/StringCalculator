@@ -17,12 +17,13 @@ class StringCalculatorTest {
         return Stream.of(
                 Arguments.of("", 0),
                 Arguments.of("1", 1),
-                Arguments.of("1,2", 3)
+                Arguments.of("1,2", 3),
+                Arguments.of("1,2,a", 3),
+                Arguments.of("apple,v,a", 0)
         );
     }
-
-    @ParameterizedTest
-    @DisplayName("Given number [{0}], when run add(), then get {1}.")
+    @ParameterizedTest(name="Given number [{0}], when run add(), then get {1}.")
+    @DisplayName("Happy cases for method add()")
     @MethodSource("mockAddHappyCaseParameter")
     void givenValidData_whenCallAdd_thenGetCorrectResult(String numbers, int expectedValue) {
         assertDoesNotThrow(()-> {
