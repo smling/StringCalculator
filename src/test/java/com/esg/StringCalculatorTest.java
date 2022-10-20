@@ -24,7 +24,7 @@ class StringCalculatorTest {
                 Arguments.of("apple,v,a", 0),
                 Arguments.of("1\n2,3", 6),
                 Arguments.of("1,\n", 1),
-                Arguments.of("//[;]\n1;2", 3),
+                Arguments.of("//;\n1;2", 3),
                 Arguments.of("1001,2", 2),
                 Arguments.of("//[|||]\n1|||2|||3", 6),
                 Arguments.of("//[|][%]\n1|2%3", 6)

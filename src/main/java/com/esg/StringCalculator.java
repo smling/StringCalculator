@@ -68,7 +68,10 @@ public class StringCalculator {
                 String delimiter = matcher.group(1);
                 result.add(delimiter);
             }
-            return result;
+            if(result.size() > 0) {
+                return result;
+            }
+            return List.of(delimiterString);
         }
         return List.of(DEFAULT_DELIMITER);
     }
