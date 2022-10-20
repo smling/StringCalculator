@@ -51,7 +51,7 @@ public class StringCalculator {
     }
 
     private boolean requiredCustomDelimiter(String numbers) {
-        if(isNullOrEmpty(numbers) || numbers.length() < 3) {
+        if(isNullOrEmpty(numbers) || numbers.length() <= DEFAULT_DELIMITER_PREFIX.length()) {
             return false;
         }
         return numbers.startsWith(DEFAULT_DELIMITER_PREFIX);
