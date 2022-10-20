@@ -18,19 +18,12 @@ public class StringCalculator {
     private static final int DEFAULT_ALLOW_NUMBER_RANGE_END = 1000;
 
     public int add(String numbers) {
-        List<String> delimiters = getDelimiter(numbers);
-        String convertedNumbers = numbers;
-        for(String delimiter : delimiters) {
-            convertedNumbers = convertedNumbers.replace(delimiter, DEFAULT_DELIMITER);
-        }
-        return add(convertedNumbers, DEFAULT_DELIMITER);
-    }
-    private int add(String numbers, String delimiter) {
         AtomicInteger result = new AtomicInteger();
         if(isNullOrEmpty(numbers)) {
             return result.get();
         }
-        List<Integer> convertedNumbers = convertToIntegers(numbers, delimiter);
+        String convertedNumberWithDelimiter = convertWithDelimiter(numbers);
+        List<Integer> convertedNumbers = convertToIntegers(convertedNumberWithDelimiter, DEFAULT_DELIMITER);
         List<Integer> negativeNumbers = getNegativeNumbers(convertedNumbers);
         if(negativeNumbers.size() > 0) {
             throw new NegativeNumberFoundException(negativeNumbers);
@@ -39,7 +32,14 @@ public class StringCalculator {
         convertedNumbersInRange.forEach(result::addAndGet);
         return result.get();
     }
-
+    private String convertWithDelimiter(String numbers) {
+        List<String> delimiters = getDelimiter(numbers);
+        String convertedNumbers = numbers;
+        for(String delimiter : delimiters) {
+            convertedNumbers = convertedNumbers.replace(delimiter, DEFAULT_DELIMITER);
+        }
+        return convertedNumbers;
+    }
     private List<Integer> convertToIntegers(String numbers,  String delimiter) {
         return Arrays.stream(numbers.replace(DEFAULT_DELIMITER_SUFFIX,delimiter).split(delimiter)).map(o-> {
             try {
