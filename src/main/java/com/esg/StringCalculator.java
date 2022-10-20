@@ -23,7 +23,7 @@ public class StringCalculator {
             return result.get();
         }
         String convertedNumberWithDelimiter = convertWithDelimiter(numbers);
-        List<Integer> convertedNumbers = convertToIntegers(convertedNumberWithDelimiter, DEFAULT_DELIMITER);
+        List<Integer> convertedNumbers = convertToIntegers(convertedNumberWithDelimiter);
         List<Integer> negativeNumbers = getNegativeNumbers(convertedNumbers);
         if(negativeNumbers.size() > 0) {
             throw new NegativeNumberFoundException(negativeNumbers);
@@ -40,8 +40,8 @@ public class StringCalculator {
         }
         return convertedNumbers;
     }
-    private List<Integer> convertToIntegers(String numbers,  String delimiter) {
-        return Arrays.stream(numbers.replace(DEFAULT_DELIMITER_SUFFIX,delimiter).split(delimiter)).map(o-> {
+    private List<Integer> convertToIntegers(String numbers) {
+        return Arrays.stream(numbers.replace(DEFAULT_DELIMITER_SUFFIX,DEFAULT_DELIMITER).split(DEFAULT_DELIMITER)).map(o-> {
             try {
                 return Integer.parseInt(o);
             } catch (NumberFormatException ex) {
